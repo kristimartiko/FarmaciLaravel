@@ -17,9 +17,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'emri',
+        'mbiemri',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -40,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $timestamps = false;
+
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
+    }
 }
