@@ -9,10 +9,16 @@ class DepoFarmacie extends Model
 {
     use HasFactory;
 
+    protected $table = 'depofarmacie';
+    protected $primaryKey = 'depo_id';
+    public $timestamps = false;
+    
     protected $fillable = [
         'sasi',
         'product_id'
     ];
 
-    public $timestamps = false;
+    public function product() {
+        return $this->belongsTo(Produkt::Class, 'product_id', 'product_id');
+    }
 }

@@ -9,11 +9,14 @@ class Role extends Model
 {
     use HasFactory;
 
+    protected $table = 'role';
+    protected $primaryKey = 'role_id';
+    public $timestamps = false;
+
     protected $fillable = [
         'emriRolit'
     ];
 
-    public $timestamps = false;
 }
 
 
