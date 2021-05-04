@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\Produkt;
-use app\Models\DepoFarmacie;
+use App\Models\Produkt;
+use App\Models\DepoFarmacie;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class ProduktController extends Controller
 {
@@ -18,4 +19,36 @@ class ProduktController extends Controller
         })
         ->get();
     }
+
+    public function addProduct(Request $request) {
+        $request->validate([
+            'emri' => 'required',
+            'cmimi' => 'required',
+            'imazhi' => 'required',
+            'pershkrimi' => 'required'
+        ]);
+        $emri = $request->emri;
+        $cmimi = $request->cmimi;
+        $imazhi = $request->imazhi;
+        $pershkrimi = $request->pershkrimi;
+        DB::table('produkt')->insert([
+            'emri' => $emri,
+            'cmimi' => $cmimi,
+            'imazhi' => $imazhi,
+            'pershkrimi' => $pershkrimi
+        ]);
+    }
+
+    public function addQuantity(Request $request, $id) {
+        $request->validate([
+            'sasi' => 'required'
+        ]);
+        $sasi = $request->sasi;
+        DB::table('depofarmacie')->insert([
+            'sasi' => $sasi,
+            'product_id' => $id
+        ]);
+    }
+
+    
 }

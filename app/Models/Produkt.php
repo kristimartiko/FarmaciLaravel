@@ -11,7 +11,7 @@ class Produkt extends Model
     use HasFactory;
 
     protected $table = 'produkt';
-    protected $timestamps = false;
+    public $timestamps = false;
     protected $primaryKey = 'product_id';
 
     protected $fillable = [
