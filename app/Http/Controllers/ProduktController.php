@@ -37,18 +37,5 @@ class ProduktController extends Controller
             'imazhi' => $imazhi,
             'pershkrimi' => $pershkrimi
         ]);
-    }
-
-    public function addQuantity(Request $request, $id) {
-        $request->validate([
-            'sasi' => 'required'
-        ]);
-        $sasi = $request->sasi;
-        DB::table('depofarmacie')->insert([
-            'sasi' => $sasi,
-            'product_id' => $id
-        ]);
-    }
-
-    
+    }    
 }
