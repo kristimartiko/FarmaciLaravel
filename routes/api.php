@@ -23,6 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/getAllProducts', [ProduktController::class, 'getAllProducts']);
 Route::post('/addProduct', [ProduktController::class, 'addProduct']);
-Route::post('/addQuantity', [ProduktController::class, 'addQuantity']);
+Route::delete('/delete/{id}', [ProduktController::class, 'destroy']);
 
 Route::post('/register', [LoginController::class, 'register']);

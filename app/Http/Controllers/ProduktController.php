@@ -37,10 +37,22 @@ class ProduktController extends Controller
         $request->except('sasi');
 
         $valrequest = Produkt::create($request->all());
-        
+
         DB::table('depofarmacie')->insert([
             'sasi' => $sasi,
             'product_id' => $valrequest->product_id
         ]);
     }    
+
+    public function destroy($id) {
+        Produkt::destroy($id);
+        DB::table('depofarmacie')->where('product_id', '=', $id)->delete();
+    }
+
+    public function update(Request $request, $id) {
+        $product = Produkt::find($id);
+        $product->update($request->all());
+        return $product;
+    }
+
 }
