@@ -18,7 +18,7 @@ class User extends Authenticatable
     protected $fillable = [
         'emri',
         'mbiemri',
-        'email',
+        'emaili',
         'password'
     ];
 
