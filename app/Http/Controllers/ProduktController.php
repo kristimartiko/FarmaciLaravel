@@ -25,17 +25,22 @@ class ProduktController extends Controller
             'emri' => 'required',
             'cmimi' => 'required',
             'imazhi' => 'required',
-            'pershkrimi' => 'required'
+            'pershkrimi' => 'required',
+            'sasi' => 'required'
         ]);
         $emri = $request->emri;
         $cmimi = $request->cmimi;
         $imazhi = $request->imazhi;
         $pershkrimi = $request->pershkrimi;
-        DB::table('produkt')->insert([
-            'emri' => $emri,
-            'cmimi' => $cmimi,
-            'imazhi' => $imazhi,
-            'pershkrimi' => $pershkrimi
+        $sasi = $request->sasi;
+
+        $request->except('sasi');
+
+        $valrequest = Produkt::create($request->all());
+        
+        DB::table('depofarmacie')->insert([
+            'sasi' => $sasi,
+            'product_id' => $valrequest->product_id
         ]);
     }    
 }
