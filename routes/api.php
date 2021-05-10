@@ -28,6 +28,9 @@ Route::delete('/delete/{id}', [ProduktController::class, 'destroy']);
 Route::put('/update/{id}', [Produkt::class, 'update']);
 
 Route::post('/addToCart/{id}', [ShporteController::class, 'shtoNeShporte']);
+Route::post('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
+Route::post('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
+Route::delete('/cartDelete/{id}', [ShporteController::class, 'fshij']);
 
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);

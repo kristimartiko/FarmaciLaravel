@@ -24,4 +24,18 @@ class ShporteController extends Controller
             ]);
         }
     }
+
+    public function shtoSasi($id) {
+        DB::table('shporta')->where('shporte_id', '=', $id)->increment('sasi');
+    }
+
+    public function hiqSasi($id) {
+        DB::table('shporta')->where('shporte_id', '=', $id)->decrement('sasi');
+    }
+
+    public function fshij($id) {
+        DB::table('shporta')->where('shporte_id', '=', $id)->delete();
+    }
+
+    public function purchase() {}
 }
