@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProduktController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ShporteController;
 
 
 /*
@@ -24,5 +25,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/getAllProducts', [ProduktController::class, 'getAllProducts']);
 Route::post('/addProduct', [ProduktController::class, 'addProduct']);
 Route::delete('/delete/{id}', [ProduktController::class, 'destroy']);
+Route::put('/update/{id}', [Produkt::class, 'update']);
+
+Route::post('/addToCart/{id}', [ShporteController::class, 'shtoNeShporte']);
 
 Route::post('/register', [LoginController::class, 'register']);
+Route::post('/login', [LoginController::class, 'login']);

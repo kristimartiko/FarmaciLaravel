@@ -7,6 +7,8 @@ use App\Models\Produkt;
 use App\Models\DepoFarmacie;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 class ProduktController extends Controller
 {
@@ -49,8 +51,9 @@ class ProduktController extends Controller
         DB::table('depofarmacie')->where('product_id', '=', $id)->delete();
     }
 
-    public function update(Request $request, $id) {
-        $product = Produkt::find($id);
+    //gabim
+    public function update(Request $request, $product_id) {
+        $product = Produkt::find($product_id);
         $product->update($request->all());
         return $product;
     }
