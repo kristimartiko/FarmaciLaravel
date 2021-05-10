@@ -18,7 +18,7 @@ class LoginController extends Controller
             'emaili' => 'required',
             'password' => 'required'
         ]);
-        $email = $request->email;
+        $emaili = $request->emaili;
         $password = $request->password;
 
         $token = auth()->attempt(compact('emaili', 'password'));
@@ -26,7 +26,7 @@ class LoginController extends Controller
         if(!$token = auth()->attempt(compact('emaili', 'password'))) {
             return response()->json(['error' => 'Incorrect email/password']);
         }
-        return resonse()->json(['token' => $token]);
+        return response()->json(['token' => $token]);
     }
 
     public function register(Request $request) {
@@ -42,10 +42,8 @@ class LoginController extends Controller
         $emaili = $request->emaili;
         $password = Hash::make($request->password);
 
-        $valrequest = User::create($request->all());
-        $role_id = DB::table('role')->select('role_id')->where('emriRolit', '=', 'User')->get();
-        
-      
+        $valrequest = User::create(compact('emri', 'mbiemri', 'emaili', 'password'));
+          
         DB::table('user_role')->insert([
             'user_id' => $valrequest->user_id,
             'role_id' => 1
