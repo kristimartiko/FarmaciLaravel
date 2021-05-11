@@ -25,12 +25,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/getAllProducts', [ProduktController::class, 'getAllProducts']);
 Route::post('/addProduct', [ProduktController::class, 'addProduct']);
 Route::delete('/delete/{id}', [ProduktController::class, 'destroy']);
-Route::put('/update/{id}', [Produkt::class, 'update']);
+Route::put('/update/{id}', [ProduktController::class, 'update']);
 
 Route::post('/addToCart/{id}', [ShporteController::class, 'shtoNeShporte']);
 Route::post('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
 Route::post('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
 Route::delete('/cartDelete/{id}', [ShporteController::class, 'fshij']);
+Route::post('/purchase', [ShporteController::class, 'purchase']);
 
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/isAdmin', [LoginController::class, 'isAdmin']);
+Route::get('/getActualUser', [LoginController::class, 'getActualUser']);
+Route::post('/logout', [LoginController::class, 'logout']);

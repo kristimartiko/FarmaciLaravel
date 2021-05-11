@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produkt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\HistorikuIBlerjes;
 
 class ShporteController extends Controller
 {
@@ -37,5 +38,15 @@ class ShporteController extends Controller
         DB::table('shporta')->where('shporte_id', '=', $id)->delete();
     }
 
-    public function purchase() {}
+    public function purchase() {
+        $user = Auth::id();
+        $date = date("Y/m/d");
+        $purchased = HistorikuIBlerjes::where('user_id', '=', $user)->get();
+        DB::table('historikuiblerjes')->insert([
+            'sasi' => $purchased->sasi,
+            'data' => $date,
+            'product_id' => $purchased->product_id,
+            'user_id' => $user
+        ]);
+    }
 }
