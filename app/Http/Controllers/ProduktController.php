@@ -51,7 +51,6 @@ class ProduktController extends Controller
         DB::table('depofarmacie')->where('product_id', '=', $id)->delete();
     }
 
-    //gabim
     public function update(Request $request, $product_id) {
         $product = Produkt::find($product_id);
         $product->update($request->all());
