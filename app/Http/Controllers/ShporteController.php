@@ -41,12 +41,20 @@ class ShporteController extends Controller
     public function purchase() {
         $user = Auth::id();
         $date = date("Y/m/d");
-        $purchased = HistorikuIBlerjes::where('user_id', '=', $user)->get();
-        DB::table('historikuiblerjes')->insert([
-            'sasi' => $purchased->sasi,
-            'data' => $date,
-            'product_id' => $purchased->product_id,
-            'user_id' => $user
-        ]);
+        $purchases = DB::table('shporta')->where('user_id', '=', $user)->get();
+        foreach($purchases as $purchase) {
+            DB::table('historikuiblerjes')->insert([
+                'sasi' => $purchase->sasi,
+                'data' => $date,
+                'product_id' => $purchase->product_id,
+                'user_id' => $user
+            ]);
+        }
+        DB::table('shporta')->where('user_id', '=', $user)->delete();
+    }
+
+    public function getPurchases() {
+        $user = Auth::id();
+        return DB::table('historikuiblerjes')->where('user_id', '=', $user)->get();
     }
 }

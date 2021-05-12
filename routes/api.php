@@ -35,6 +35,7 @@ Route::post('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
 Route::post('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
 Route::delete('/cartDelete/{id}', [ShporteController::class, 'fshij']);
 Route::post('/purchase', [ShporteController::class, 'purchase']);
+Route::get('/getPurchases', [ShporteController::class, 'getPurchases']);
 
 //login and register api
 Route::post('/register', [LoginController::class, 'register']);
