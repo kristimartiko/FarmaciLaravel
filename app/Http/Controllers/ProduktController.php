@@ -57,4 +57,14 @@ class ProduktController extends Controller
         return $product;
     }
 
+    public function addQuantity(Request $request, $id) {
+        $request->validate([
+            'sasi' => 'required'
+        ]);
+
+        $sasi = $request->sasi;
+
+        DB::table('depofarmacie')->where('product_id', '=', $id)->update(['sasi' => $sasi]);
+    }
+
 }

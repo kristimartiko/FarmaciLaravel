@@ -28,6 +28,7 @@ Route::get('/getAllProducts', [ProduktController::class, 'getAllProducts']);
 Route::middleware('auth')->post('/addProduct', [ProduktController::class, 'addProduct']);
 Route::middleware('auth')->delete('/delete/{id}', [ProduktController::class, 'destroy']);
 Route::middleware('auth')->put('/update/{id}', [ProduktController::class, 'update']);
+Route::middleware('auth')->put('/updateSasi/{id}', [ProduktController::class, 'addQuantity']);
 
 //shporte api
 Route::middleware('auth')->post('/addToCart/{id}', [ShporteController::class, 'shtoNeShporte']);
