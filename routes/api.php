@@ -25,26 +25,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //product api
 Route::get('/getAllProducts', [ProduktController::class, 'getAllProducts']);
-Route::post('/addProduct', [ProduktController::class, 'addProduct']);
-Route::delete('/delete/{id}', [ProduktController::class, 'destroy']);
-Route::put('/update/{id}', [ProduktController::class, 'update']);
+Route::middleware('auth')->post('/addProduct', [ProduktController::class, 'addProduct']);
+Route::middleware('auth')->delete('/delete/{id}', [ProduktController::class, 'destroy']);
+Route::middleware('auth')->put('/update/{id}', [ProduktController::class, 'update']);
 
 //shporte api
-Route::post('/addToCart/{id}', [ShporteController::class, 'shtoNeShporte']);
-Route::post('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
-Route::post('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
-Route::delete('/cartDelete/{id}', [ShporteController::class, 'fshij']);
-Route::post('/purchase', [ShporteController::class, 'purchase']);
-Route::get('/getPurchases', [ShporteController::class, 'getPurchases']);
+Route::middleware('auth')->post('/addToCart/{id}', [ShporteController::class, 'shtoNeShporte']);
+Route::middleware('auth')->post('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
+Route::middleware('auth')->post('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
+Route::middleware('auth')->delete('/cartDelete/{id}', [ShporteController::class, 'fshij']);
+Route::middleware('auth')->post('/purchase', [ShporteController::class, 'purchase']);
+Route::middleware('auth')->get('/getPurchases', [ShporteController::class, 'getPurchases']);
 
 //login and register api
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
-Route::get('/isAdmin', [LoginController::class, 'isAdmin']);
-Route::get('/getActualUser', [LoginController::class, 'getActualUser']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::middleware('auth')->get('/isAdmin', [LoginController::class, 'isAdmin']);
+Route::middleware('auth')->get('/getActualUser', [LoginController::class, 'getActualUser']);
+Route::middleware('auth')->post('/logout', [LoginController::class, 'logout']);
 
 //user api
-Route::get('/getUsers', [UserController::class, 'getUsers']);
-Route::put('/updateUser/{id}', [UserController::class, 'updateUser']);
-Route::delete('/deleteUser/{id}', [UserController::class. 'deleteUser']);
+Route::middleware('auth')->get('/getUsers', [UserController::class, 'getUsers']);
+Route::middleware('auth')->put('/updateUser/{id}', [UserController::class, 'updateUser']);
+Route::middleware('auth')->delete('/deleteUser/{id}', [UserController::class. 'deleteUser']);
