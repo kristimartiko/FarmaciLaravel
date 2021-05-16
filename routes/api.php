@@ -43,7 +43,7 @@ Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::middleware('auth')->get('/isAdmin', [LoginController::class, 'isAdmin']);
 Route::middleware('auth')->get('/getActualUser', [LoginController::class, 'getActualUser']);
-Route::middleware('auth')->post('/logout', [LoginController::class, 'logout']);
+Route::middleware('auth')->get('/logout', [LoginController::class, 'logout']);
 
 //user api
 Route::middleware('auth')->get('/getUsers', [UserController::class, 'getUsers']);
