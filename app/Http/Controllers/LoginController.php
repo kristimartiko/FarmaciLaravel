@@ -26,7 +26,7 @@ class LoginController extends Controller
         if(!$token = auth()->attempt(compact('emaili', 'password'))) {
             return response()->json(['error' => 'Incorrect email/password']);
         }
-        return response()->json(['token' => $token]);
+        return response()->json($token);
     }
 
     public function register(Request $request) {
