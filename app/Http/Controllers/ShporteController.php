@@ -26,6 +26,13 @@ class ShporteController extends Controller
         }
     }
 
+    public function getShporte() {
+        if (Auth::check()) {
+            $user_id = Auth::id();
+           }
+           return DB::table('shporta')->where('user_id', '=', $user_id)->get();
+    }
+
     public function shtoSasi($id) {
         DB::table('shporta')->where('shporte_id', '=', $id)->increment('sasi');
     }

@@ -24,7 +24,9 @@ class LoginController extends Controller
         $token = auth()->attempt(compact('emaili', 'password'));
 
         if(!$token = auth()->attempt(compact('emaili', 'password'))) {
-            return response()->json(['error' => 'Incorrect email/password']);
+            $this->reportable(function (InvalidOrderException $e) {
+                return "Invalid Email/Password";
+            });
         }
         return response()->json($token);
     }
@@ -42,6 +44,9 @@ class LoginController extends Controller
         $emaili = $request->emaili;
         $password = Hash::make($request->password);
 
+        $user = User::where('emaili', '=', $request->emaili)->first();
+        if($user === null) {
+
         $valrequest = User::create(compact('emri', 'mbiemri', 'emaili', 'password'));
           
         DB::table('user_role')->insert([
@@ -53,6 +58,11 @@ class LoginController extends Controller
             'message' => 'Great success',
             'valrequest' => $valrequest, 201
         ]);
+        } else {
+            $this->reportable(function (InvalidOrderException $e) {
+                return "Email Exists";
+            });
+        }
     }
 
     public function getActualUser() {
