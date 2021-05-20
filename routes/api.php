@@ -25,16 +25,27 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //product api
 Route::get('/getAllProducts', [ProduktController::class, 'getAllProducts']);
-Route::middleware('auth')->post('/addProduct', [ProduktController::class, 'addProduct']);
-Route::middleware('auth')->delete('/delete/{id}', [ProduktController::class, 'destroy']);
-Route::middleware('auth')->put('/update/{id}', [ProduktController::class, 'update']);
-Route::middleware('auth')->put('/updateSasi/{id}', [ProduktController::class, 'addQuantity']);
+//Route::middleware('auth')->post('/addProduct', [ProduktController::class, 'addProduct']);
+//Route::middleware('auth')->delete('/delete/{id}', [ProduktController::class, 'destroy']);
+//Route::middleware('auth')->put('/update/{id}', [ProduktController::class, 'update']);
+//Route::middleware('auth')->put('/updateSasi/{id}', [ProduktController::class, 'addQuantity']);
+Route::group(['middleware' => ['isAdmin']], function() {
+    Route::post('/addProduct', [ProduktController::class, 'addProduct']);
+    Route::delete('/delete/{id}', [ProduktController::class, 'destroy']);
+    Route::put('/update/{id}', [ProduktController::class, 'update']);
+    Route::put('/updateSasi/{id}', [ProduktController::class, 'addQuantity']);
+
+    Route::get('/getUsers', [UserController::class, 'getUsers']);
+    Route::put('/updateUsers/{id}', [UserController::class, 'updateUser']);
+    Route::delete('/deleteUser/{id}', [UserController::class, 'deleteUser']);
+});
+
 
 //shporte api
 Route::middleware('auth')->post('/addToCart/{id}', [ShporteController::class, 'shtoNeShporte']);
 Route::middleware('auth')->get('/getShporte', [ShporteController::class, 'getShporte']);
-Route::middleware('auth')->post('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
-Route::middleware('auth')->post('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
+Route::middleware('auth')->get('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
+Route::middleware('auth')->get('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
 Route::middleware('auth')->delete('/cartDelete/{id}', [ShporteController::class, 'fshij']);
 Route::middleware('auth')->post('/purchase', [ShporteController::class, 'purchase']);
 Route::middleware('auth')->get('/getPurchases', [ShporteController::class, 'getPurchases']);
@@ -47,6 +58,6 @@ Route::middleware('auth')->get('/getActualUser', [LoginController::class, 'getAc
 Route::middleware('auth')->get('/logout', [LoginController::class, 'logout']);
 
 //user api
-Route::middleware('auth')->get('/getUsers', [UserController::class, 'getUsers']);
-Route::middleware('auth')->put('/updateUser/{id}', [UserController::class, 'updateUser']);
-Route::middleware('auth')->delete('/deleteUser/{id}', [UserController::class. 'deleteUser']);
+//Route::middleware('auth')->get('/getUsers', [UserController::class, 'getUsers']);
+//Route::middleware('auth')->put('/updateUser/{id}', [UserController::class, 'updateUser']);
+//Route::middleware('auth')->delete('/deleteUser/{id}', [UserController::class. 'deleteUser']);

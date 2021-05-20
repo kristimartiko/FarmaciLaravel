@@ -78,7 +78,7 @@ class LoginController extends Controller
         $user_id = Auth::id();
         $role = DB::table('user_role')->where('user_id', '=', $user_id)->first();
         if($role->role_id == 1) {
-            return "User";
-        } else return "Admin";
+            return false;
+        } else return true;
     }
 }

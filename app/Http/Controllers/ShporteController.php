@@ -30,7 +30,10 @@ class ShporteController extends Controller
         if (Auth::check()) {
             $user_id = Auth::id();
            }
-           return DB::table('shporta')->where('user_id', '=', $user_id)->get();
+           $shporta = DB::table('shporta')->where('user_id', '=', $user_id)->get();
+           foreach($shporta as $shporte) {
+               return DB::select('SELECT produkt.product_id, produkt.emri, produkt.cmimi, shporta.sasi, shporta.shporte_id from produkt join shporta on produkt.product_id = shporta.product_id');
+           }
     }
 
     public function shtoSasi($id) {
