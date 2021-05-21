@@ -16,7 +16,7 @@ class ShporteController extends Controller
         }
         $is_present = DB::table('shporta')->where('product_id','=', $id)->where('user_id', '=', $user_id)->first();
         if($is_present) {
-            return DB::table('shporta')->increment('sasi');
+            return DB::table('shporta')->increment('sasi')->where('product_id', '=', $id);
         } if(!$is_present) {
             return DB::table('shporta')->insert([
                 'sasi' => 1,
@@ -27,12 +27,10 @@ class ShporteController extends Controller
     }
 
     public function getShporte() {
-        if (Auth::check()) {
-            $user_id = Auth::id();
-           }
+           $user_id = Auth::id();
            $shporta = DB::table('shporta')->where('user_id', '=', $user_id)->get();
            foreach($shporta as $shporte) {
-               return DB::select('SELECT produkt.product_id, produkt.emri, produkt.cmimi, shporta.sasi, shporta.shporte_id from produkt join shporta on produkt.product_id = shporta.product_id');
+               return DB::select("SELECT produkt.product_id, produkt.emri, produkt.cmimi, shporta.sasi, shporta.shporte_id from produkt join shporta on produkt.product_id = shporta.product_id where shporta.user_id = '$user_id'");
            }
     }
 
@@ -65,6 +63,9 @@ class ShporteController extends Controller
 
     public function getPurchases() {
         $user = Auth::id();
-        return DB::table('historikuiblerjes')->where('user_id', '=', $user)->get();
+        $historik = DB::table('historikuiblerjes')->where('user_id', '=', $user)->get();
+        foreach($historik as $hist) {
+            return DB::select("SELECT produkt.product_id, produkt.emri, historikuiblerjes.sasi, historikuiblerjes.data, historikuiblerjes.historik_id from produkt join historikuiblerjes on produkt.product_id = historikuiblerjes.product_id where historikuiblerjes.user_id = '$user'");
+        }
     }
 }

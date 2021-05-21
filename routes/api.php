@@ -29,7 +29,7 @@ Route::get('/getAllProducts', [ProduktController::class, 'getAllProducts']);
 //Route::middleware('auth')->delete('/delete/{id}', [ProduktController::class, 'destroy']);
 //Route::middleware('auth')->put('/update/{id}', [ProduktController::class, 'update']);
 //Route::middleware('auth')->put('/updateSasi/{id}', [ProduktController::class, 'addQuantity']);
-Route::group(['middleware' => ['isAdmin']], function() {
+Route::middleware(['isAdmin'])->group(function() {
     Route::post('/addProduct', [ProduktController::class, 'addProduct']);
     Route::delete('/delete/{id}', [ProduktController::class, 'destroy']);
     Route::put('/update/{id}', [ProduktController::class, 'update']);
@@ -47,7 +47,7 @@ Route::middleware('auth')->get('/getShporte', [ShporteController::class, 'getShp
 Route::middleware('auth')->get('/shtoSasi/{id}', [ShporteController::class, 'shtoSasi']);
 Route::middleware('auth')->get('/hiqSasi/{id}', [ShporteController::class, 'hiqSasi']);
 Route::middleware('auth')->delete('/cartDelete/{id}', [ShporteController::class, 'fshij']);
-Route::middleware('auth')->post('/purchase', [ShporteController::class, 'purchase']);
+Route::middleware('auth')->get('/purchase', [ShporteController::class, 'purchase']);
 Route::middleware('auth')->get('/getPurchases', [ShporteController::class, 'getPurchases']);
 
 //login and register api

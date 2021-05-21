@@ -22,8 +22,8 @@ class isAdmin
     public function isAdmin() {
         $user_id = Auth::id();
         $role = DB::table('user_role')->where('user_id', '=', $user_id)->first();
-        if($role->role_id == 1) {
-            return false;
-        } else return true;
+        if($role->role_id == 2) {
+            return true;
+        } else return false;
     }
 }
