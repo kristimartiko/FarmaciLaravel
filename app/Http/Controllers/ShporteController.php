@@ -57,6 +57,9 @@ class ShporteController extends Controller
                 'product_id' => $purchase->product_id,
                 'user_id' => $user
             ]);
+            $sasiHistorik = DB::table('depofarmacie')->select('depofarmacie.sasi')->where('product_id', '=', $purchase->product_id)->get();
+            $sasiResult = $sasiHistorik[0]->sasi - $purchase->sasi;
+            DB::table('depofarmacie')->where('product_id', '=', $purchase->product_id)->update(['sasi' => $sasiResult]);
         }
         DB::table('shporta')->where('user_id', '=', $user)->delete();
     }
