@@ -63,7 +63,7 @@ class ShporteController extends Controller
                 DB::table('depofarmacie')->where('product_id', '=', $purchase->product_id)->update(['sasi' => $sasiResult]);
             } else {
                 $this->reportable(function (InvalidOrderException $e) {
-                    return "Invalid Email/Password";
+                    return "Invalid!";
                 });
             }
      }
